@@ -1,0 +1,78 @@
+"""
+At the command line, only need to run once to install the package via pip:
+
+$ pip install google-generativeai
+"""
+
+import google.generativeai as genai
+
+genai.configure(api_key="YOUR_API_KEY")
+
+# Set up the model
+generation_config = {
+  "temperature": 1,
+  "top_p": 0.95,
+  "top_k": 0,
+  "max_output_tokens": 8192,
+}
+
+safety_settings = [
+  {
+    "category": "HARM_CATEGORY_HARASSMENT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+  {
+    "category": "HARM_CATEGORY_HATE_SPEECH",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+  {
+    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+  {
+    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+  },
+]
+
+model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
+                              generation_config=generation_config,
+                              safety_settings=safety_settings)
+
+convo = model.start_chat(history=[
+  {
+    "role": "user",
+    "parts": ["pergunta: com base na lista de bairros, enumere do melhor para o pior com base nos numeros ao lado ( 1 muito bom, 2 mais ou menos e 3 ruim)\n\nresposta:     \nbairro alto\t1\nsanta quiteria\t1\nboa vista\t2\nbarigui\t3\n\n\npergunta: com base na lista de bairros, enumere do melhor para o pior com base nos numeros ao lado ( 1 muito bom, 2 mais ou menos e 3 ruim)\n\nresposta:\nnovo mundo\t1\nxaxim\t2\nparolin\t1\nguaira\t2\nfanny\t2\nhauer\t1\nboqueirão\t2\npinhais\t2\ncapão da imbuia\t2\ncapão raso\t1\ncabral\t1\nbacacheri\t1\nbairro alto\t1\nboa vista\t2\nbarigui\t3\nsanta quiteria\t1\nvila izabel\t1\nagua verde\t3\nbatel\t3\nrebouças\t3\nportão\t1\nbigorrilho\t3\ncristo rei\t1"]
+  },
+  {
+    "role": "model",
+    "parts": ["resposta:\ncabral\t1\nbairro alto\t1\nbacacheri\t1\ncapão raso\t1\ncristo rei\t1\nhauer\t1\nnovo mundo\t1\nparolin\t1\nportão\t1\nsanta quiteria\t1\nvila izabel\t1\nxaxim\t2\nboa vista\t2\nboqueirão\t2\ncapão da imbuia\t2\nfanny\t2\nguaira\t2\npinhais\t2\nagua verde\t3\nbarigui\t3\nbatel\t3\nbigorrilho\t3\nrebouças\t3"]
+  },
+  {
+    "role": "user",
+    "parts": ["pegue esses valores e coloque em uma planilha: \n1 coluna o nome dos bairros; 2 coluna o numero do bairro, e coloque 1 com a cor azul, o 2 com a cor amarela e o 3 com a cor vermelha."]
+  },
+  {
+    "role": "model",
+    "parts": ["## Instruções para criar a planilha com formatação condicional:\n\nComo não consigo criar planilhas diretamente, vou te orientar como fazer isso no Excel ou Planilhas Google (o processo é bem similar):\n\n**1. Configurando os dados:**\n\n*   **Coluna A:** Insira os nomes dos bairros em cada célula (ex: A1 = cabral, A2 = bairro alto, etc.).\n*   **Coluna B:** Insira o número correspondente a cada bairro (ex: B1 = 1, B2 = 1, etc.).\n\n**2. Formatação Condicional:**\n\n*   Selecione a coluna B (coluna dos números).\n*   No Excel: Vá na aba \"Página Inicial\" > \"Formatação Condicional\" > \"Nova Regra\".\n*   No Planilhas Google: Vá em \"Formatar\" > \"Formatação condicional\". \n\n**3. Criando as regras:**\n\n*   **Regra 1 (Azul):**\n    *   Escolha \"Formatar apenas células que contenham\".\n    *   Em \"Formatar células se...\" selecione \"Valor da célula é\" > \"igual a\" > digite \"1\".\n    *   Clique em \"Formatar\" e escolha a cor de preenchimento azul.\n*   **Regra 2 (Amarelo):**\n    *   Repita o processo da Regra 1, mas escolha \"igual a\" > \"2\" e a cor amarela. \n*   **Regra 3 (Vermelho):**\n    *   Repita o processo da Regra 1, mas escolha \"igual a\" > \"3\" e a cor vermelha. \n\n**4. Aplique as regras:**\n\n*   Clique em \"OK\" para aplicar as regras de formatação.\n\n**Resultado:** \n\nAgora sua planilha terá os bairros na coluna A e os números na coluna B. Os números 1 estarão em azul, os 2 em amarelo e os 3 em vermelho, facilitando a visualização!"]
+  },
+  {
+    "role": "user",
+    "parts": ["faça essa planilha."]
+  },
+  {
+    "role": "model",
+    "parts": ["Sinto muito, mas eu não consigo criar arquivos diretamente, como uma planilha. Eu posso gerar o conteúdo, como fiz na resposta anterior, mas você precisará colar esses dados em uma planilha e aplicar a formatação. \n\nSeria ótimo se eu pudesse fazer isso por você, mas minhas capacidades se limitam a gerar texto. 😉"]
+  },
+  {
+    "role": "user",
+    "parts": ["pegue esses valores e coloque em uma tabela: \n1 coluna o nome dos bairros; 2 coluna o numero do bairro, e coloque 1 com a cor azul, o 2 com a cor amarela e o 3 com a cor vermelha."]
+  },
+  {
+    "role": "model",
+    "parts": ["| Bairro          | Classificação |\n|-----------------|----------------|\n| Cabral          | 🟦 1          | \n| Bairro Alto     | 🟦 1          |\n| Bacacheri       | 🟦 1          | \n| Capão Raso     | 🟦 1          |\n| Cristo Rei      | 🟦 1          |\n| Hauer           | 🟦 1          |\n| Novo Mundo      | 🟦 1          | \n| Parolin         | 🟦 1          |\n| Portão          | 🟦 1          | \n| Santa Quitéria | 🟦 1          | \n| Vila Izabel    | 🟦 1          |\n| Xaxim           | 🟨 2          | \n| Boa Vista      | 🟨 2          | \n| Boqueirão       | 🟨 2          | \n| Capão da Imbuia | 🟨 2          | \n| Fanny           | 🟨 2          | \n| Guaira          | 🟨 2          | \n| Pinhais         | 🟨 2          | \n| Água Verde      | 🟥 3          | \n| Barigui         | 🟥 3          | \n| Batel           | 🟥 3          | \n| Bigorrilho      | 🟥 3          | \n| Rebouças        | 🟥 3          |"]
+  },
+])
+
+convo.send_message("YOUR_USER_INPUT")
+print(convo.last.text)
