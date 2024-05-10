@@ -50,22 +50,6 @@ convo = model.start_chat(history=[
   },
   {
     "role": "user",
-    "parts": ["pegue esses valores e coloque em uma planilha: \n1 coluna o nome dos bairros; 2 coluna o numero do bairro, e coloque 1 com a cor azul, o 2 com a cor amarela e o 3 com a cor vermelha."]
-  },
-  {
-    "role": "model",
-    "parts": ["## Instruções para criar a planilha com formatação condicional:\n\nComo não consigo criar planilhas diretamente, vou te orientar como fazer isso no Excel ou Planilhas Google (o processo é bem similar):\n\n**1. Configurando os dados:**\n\n*   **Coluna A:** Insira os nomes dos bairros em cada célula (ex: A1 = cabral, A2 = bairro alto, etc.).\n*   **Coluna B:** Insira o número correspondente a cada bairro (ex: B1 = 1, B2 = 1, etc.).\n\n**2. Formatação Condicional:**\n\n*   Selecione a coluna B (coluna dos números).\n*   No Excel: Vá na aba \"Página Inicial\" > \"Formatação Condicional\" > \"Nova Regra\".\n*   No Planilhas Google: Vá em \"Formatar\" > \"Formatação condicional\". \n\n**3. Criando as regras:**\n\n*   **Regra 1 (Azul):**\n    *   Escolha \"Formatar apenas células que contenham\".\n    *   Em \"Formatar células se...\" selecione \"Valor da célula é\" > \"igual a\" > digite \"1\".\n    *   Clique em \"Formatar\" e escolha a cor de preenchimento azul.\n*   **Regra 2 (Amarelo):**\n    *   Repita o processo da Regra 1, mas escolha \"igual a\" > \"2\" e a cor amarela. \n*   **Regra 3 (Vermelho):**\n    *   Repita o processo da Regra 1, mas escolha \"igual a\" > \"3\" e a cor vermelha. \n\n**4. Aplique as regras:**\n\n*   Clique em \"OK\" para aplicar as regras de formatação.\n\n**Resultado:** \n\nAgora sua planilha terá os bairros na coluna A e os números na coluna B. Os números 1 estarão em azul, os 2 em amarelo e os 3 em vermelho, facilitando a visualização!"]
-  },
-  {
-    "role": "user",
-    "parts": ["faça essa planilha."]
-  },
-  {
-    "role": "model",
-    "parts": ["Sinto muito, mas eu não consigo criar arquivos diretamente, como uma planilha. Eu posso gerar o conteúdo, como fiz na resposta anterior, mas você precisará colar esses dados em uma planilha e aplicar a formatação. \n\nSeria ótimo se eu pudesse fazer isso por você, mas minhas capacidades se limitam a gerar texto. 😉"]
-  },
-  {
-    "role": "user",
     "parts": ["pegue esses valores e coloque em uma tabela: \n1 coluna o nome dos bairros; 2 coluna o numero do bairro, e coloque 1 com a cor azul, o 2 com a cor amarela e o 3 com a cor vermelha."]
   },
   {
